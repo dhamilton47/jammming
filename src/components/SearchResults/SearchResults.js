@@ -1,32 +1,42 @@
 import React, { Component } from 'react';
 import './SearchResults.css';
-import {TrackList} from "../TrackList/TrackList";
+import TrackList from "../TrackList/TrackList";
 
-const playlistTracks = [
+const tracks=[
 	{
-		album: 'Tiny Dancer',
+		id: '1',
+		album: 'Madman Across The Water',
 		artist: 'Elton John',
-		track: 'Madman Across The Water'
+		track: 'Tiny Dancer',
+		action: '+'
 	},
 	{
-		album: 'Tiny Dancer',
+		id: '2',
+		album: 'Love Story',
 		artist: 'Tim McGraw',
-		track: 'Love Story'
+		track: 'Tiny Dancer',
+		action: '+'
 	},
 	{
-		album: 'Tiny Dancer',
+		id: '3',
+		album: 'Lullaby Renditions of Elton John',
 		artist: 'Rockabye Baby!',
-		track: 'Lullaby Renditions of Elton John'
+		track: 'Tiny Dancer',
+		action: '+'
 	},
 	{
+		id: '4',
 		album: 'Tiny Dancer',
 		artist: 'The White Raven',
-		track: 'Tiny Dancer'
+		track: 'Tiny Dancer',
+		action: '+'
 	},
 	{
-		album: 'Tiny Dancer - Live Album Version',
+		id: '5',
+		album: 'Ben Folds Live',
 		artist: 'Ben Folds',
-		track: 'Ben Folds Live'
+		track: 'Tiny Dancer - Live Album Version',
+		action: '+'
 	}];
 
 export class SearchResults extends Component {
@@ -34,7 +44,7 @@ export class SearchResults extends Component {
 		return (
 			<div className="SearchResults">
 				<h2>Results</h2>
-				<TrackList/>
+				<TrackList key={tracks.id} tracks={tracks}/>
 			</div>
 		);
 	}
