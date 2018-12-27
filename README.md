@@ -1,5 +1,5 @@
 
-##Build Front-End Web Applications from Scratch
+## Build Front-End Web Applications from Scratch
 
 #### <em>A Codecademy Intensive Course Project</em>
 
