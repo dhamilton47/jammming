@@ -31,16 +31,22 @@ Whether you're up for the challenge or not, we recommend you consider the follow
 This is a large project. Take your time and review the earlier lessons if you run into problems. Good luck!
 
 ### TODO:
-- Obtain a Spotify/Spotify Developer account.
-- Read and follow Spotify Developer Guide.
-- Determine components/methods needed:
-    * Spotify account creation/login
-    * Search bar
-    * Results list
-       * Add song
-       * Delete song
-    * Playlist:
-        * Change playlist title
-        * Save playlist
+- Spotify
+    * Obtain an account
+    * Access developer dashboard.
+    * Follow Developer Guide to register the application.
 - Clean up starting files.
 - Incorporate given HTML, CSS amd images.
+- Determine components/methods needed:
+    * Spotify account creation/login
+    * App
+    * SearchBar
+        * search
+    * SearchResults
+        * AddTrackToPlaylist
+    * Playlist:
+        * changeTitle
+        * deleteTrack
+        * savePlaylist
+    * TrackList
+    * Track
