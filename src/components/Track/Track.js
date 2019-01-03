@@ -3,6 +3,8 @@ import './Track.css';
 
 class Track extends Component {
 	render() {
+		console.log('Track: ',this.props);
+
 		return (
 			<div className="Track">
 				<div className="Track-information">

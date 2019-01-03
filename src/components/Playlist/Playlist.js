@@ -28,11 +28,12 @@ const tracks=[
 
 export class Playlist extends Component {
 	render() {
+		console.log('Playlist: ',this.props);
 		return (
 			<div className="Playlist">
 				<input defaultValue='New Playlist'/>
 				<div className="TrackList">
-					<TrackList key={tracks.id} tracks={tracks}/>
+					<TrackList tracks={tracks}/>
 				</div>
 				<a className="Playlist-save">SAVE TO SPOTIFY</a>
 			</div>
