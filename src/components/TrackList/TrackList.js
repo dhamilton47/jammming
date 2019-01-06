@@ -4,7 +4,7 @@ import Track from "../Track/Track";
 
 class TrackList extends Component {
 	render() {
-		console.log('Tracklist: ',this.props);
+//		console.log('Tracklist: ',this.props.onRemove);
 
 		return (
 			<div className="TrackList">
@@ -15,6 +15,7 @@ class TrackList extends Component {
 								key={track.id}
 								track={track}
 								onAdd={this.props.onAdd}
+								onRemove={this.props.onRemove}
 								isRemoval={this.props.isRemoval}
 							/>;
 						}

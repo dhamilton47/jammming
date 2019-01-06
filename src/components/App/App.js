@@ -14,12 +14,11 @@ class App extends Component {
 	        searchResultsTracks: [],
 	        playlistName: "Dan's Playlist",
 	        playlistTracks: playlistTracks,
-//	        playlistAction: this.playlistAction
         };
 
         this.searchSpotify = this.searchSpotify.bind(this);
-//	    this.playlistAction = this.playlistAction.bind(this);
 	    this.addTrack = this.addTrack.bind(this);
+	    this.removeTrack = this.removeTrack.bind(this);
     }
 
     searchSpotify(searchValue) {
@@ -35,13 +34,12 @@ class App extends Component {
     	this.setState({playlistTracks: this.state.playlistTracks});
     }
 
-/*
-	playlistAction(action, id) {
-    	if (action === "+" && !(id in this.state.playlistTracks)) {
-			this.state.playlistTracks.push(this.state.searchResultsTracks)
-	    }
+	removeTrack(track) {
+		const result = this.state.playlistTracks.filter(keep => keep.id !== track.id);
+		this.setState({playlistTracks: result});
 	}
-*/
+
+	}
 
     render() {
 	    console.log('App :',this.state);
@@ -58,6 +56,7 @@ class App extends Component {
 			                onAdd={this.addTrack}/>
 		                <Playlist
 			                tracks={this.state.playlistTracks}
+			                onRemove={this.removeTrack}
 		                />
 	                </div>
                 </div>
