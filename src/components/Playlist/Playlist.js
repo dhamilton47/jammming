@@ -24,7 +24,7 @@ export class Playlist extends Component {
 						isRemoval={true}
 					/>
 				</div>
-				<a className="Playlist-save">SAVE TO SPOTIFY</a>
+				<a className="Playlist-save" onClick={this.props.onSave}>SAVE TO SPOTIFY</a>
 			</div>
 		);
 	}

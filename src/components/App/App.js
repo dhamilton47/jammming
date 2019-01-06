@@ -20,6 +20,7 @@ class App extends Component {
 	    this.addTrack = this.addTrack.bind(this);
 	    this.removeTrack = this.removeTrack.bind(this);
 	    this.updatePlaylistName = this.updatePlaylistName.bind(this);
+	    this.savePlaylist = this.savePlaylist.bind(this);
     }
 
     searchSpotify(searchValue) {
@@ -44,6 +45,10 @@ class App extends Component {
     	this.setState({playlistName: name})
 	}
 
+	savePlaylist() {
+    	let trackURIs = playlistTracks.forEach(track => track.uri);
+	}
+
     render() {
 	    console.log('App :',this.state);
 
@@ -62,6 +67,7 @@ class App extends Component {
 			                playlistName={this.state.playlistName}
 			                onRemove={this.removeTrack}
 			                onNameChange={this.updatePlaylistName}
+			                onSave={this.savePlaylist}
 		                />
 	                </div>
                 </div>
