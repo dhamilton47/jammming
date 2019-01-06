@@ -61,6 +61,7 @@ class App extends Component {
 	                <div className="App-playlist">
 		                <SearchResults
 			                tracks={this.state.searchResultsTracks}
+			                onSearch={this.savePlaylist}
 			                onAdd={this.addTrack}/>
 		                <Playlist
 			                tracks={this.state.playlistTracks}

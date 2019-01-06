@@ -7,8 +7,13 @@ export class SearchBar extends Component {
 
 		this.state = {searchValue: ''};
 
+		this.search = this.search.bind(this);
 		this.handleSearchValueChange = this.handleSearchValueChange.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
+	}
+
+	search() {
+		this.props.onSearch = this.state.searchValue;
 	}
 
 	handleSearch(e) {
