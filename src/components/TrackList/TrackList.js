@@ -7,11 +7,20 @@ class TrackList extends Component {
 		console.log('Tracklist: ',this.props);
 
 		return (
-			this.props.tracks.map(
-				track => {
-					return <Track key={track.id} track={track}/>;
+			<div className="TrackList">
+				{
+					this.props.tracks.map(
+						track => {
+							return <Track
+								key={track.id}
+								track={track}
+								onAdd={this.props.onAdd}
+								isRemoval={this.props.isRemoval}
+							/>;
+						}
+					)
 				}
-			)
+			</div>
 		);
 	}
 }

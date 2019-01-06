@@ -14,9 +14,12 @@ class App extends Component {
 	        searchResultsTracks: [],
 	        playlistName: "Dan's Playlist",
 	        playlistTracks: playlistTracks,
+//	        playlistAction: this.playlistAction
         };
 
         this.searchSpotify = this.searchSpotify.bind(this);
+//	    this.playlistAction = this.playlistAction.bind(this);
+	    this.addTrack = this.addTrack.bind(this);
     }
 
     searchSpotify(searchValue) {
@@ -24,6 +27,21 @@ class App extends Component {
         this.setState({searchResultsTracks: Spotify.search(searchValue)});
     }
 
+    addTrack(track) {
+		if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+		    return;
+	    }
+    	this.state.playlistTracks.push(track);
+    	this.setState({playlistTracks: this.state.playlistTracks});
+    }
+
+/*
+	playlistAction(action, id) {
+    	if (action === "+" && !(id in this.state.playlistTracks)) {
+			this.state.playlistTracks.push(this.state.searchResultsTracks)
+	    }
+	}
+*/
 
     render() {
 	    console.log('App :',this.state);
@@ -37,6 +55,7 @@ class App extends Component {
 	                <div className="App-playlist">
 		                <SearchResults
 			                tracks={this.state.searchResultsTracks}
+			                onAdd={this.addTrack}/>
 		                <Playlist
 			                tracks={this.state.playlistTracks}
 		                />
