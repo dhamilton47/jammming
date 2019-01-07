@@ -1,13 +1,15 @@
 import key from '../env.js';
 import {searchResultsTest} from '../components/SearchResults/searchResultsTest.js';
 
+let accessToken;
+let expiresIn;
+
 export const Spotify = {
-	endpointAuthorize: 'https://accounts.spotify.com/authorize?',
-	endpointSearch: 'https://api.spotify.com/v1/search',
+//	endpointAuthorize: 'https://accounts.spotify.com/authorize?',
+//	endpointSearch: 'https://api.spotify.com/v1/search',
+//	corsAnywhere: 'https://cors-anywhere.herokuapp.com/',
 	applicationId: key['application_id'],
-	applicationSecret: key['application_secret'],
-	corsAnywhere: 'https://cors-anywhere.herokuapp.com/',
-	redirect_uri: 'http%3A%2F%2Flocalhost:3000%2Fcallback',
+	redirect_uri: 'http://localhost:3000/',
 
 
 
@@ -15,35 +17,67 @@ export const Spotify = {
 	// Search access has no user scope
 	// Saving playlist access will require limited user permission scope
 	getLogin() {
-		const response_type = 'code';
-		const scope = 'user-read-private%20user-read-email%20playlist-modify-private%20playlist-modify-public';
-
-		return fetch(
-			this.corsAnywhere
+//		const xhr = new XMLHttpRequest();
+//		const response_type = 'code';
+//		const scope = 'user-read-private%20user-read-email%20playlist-modify-private%20playlist-modify-public';
+/*
+		const url = this.corsAnywhere
 			+ this.endpointAuthorize
 			+ 'client_id=' + this.applicationId
 			+ '&response_type=' + response_type
 			+ '&redirect_uri=' + this.redirect_uri
-			+ '&scope=' + scope,
-			{headers:{'X-Requested-With': 'XMLHttpRequest'}})
-			.then(response => { return response});
+			+ '&scope=' + scope;
+*/
+
+//		xhr.responseType = 'json';
+//		xhr.onreadystatechange = () =>{
+//			if (xhr.readyState === XMLHttpRequest.DONE) {
+//				return xhr.response;
+//			}
+//		};
+
+//		xhr.open('GET', url);
+//		xhr.send();
+
+/*
+	const authOptions = {
+		url: 'https://accounts.spotify.com/api/token',
+		form: {
+		code: 'code',
+			redirect_uri: this.redirect_uri,
+			grant_type: 'authorization_code'
+		},
+		headers: {
+			'Authorization': 'Basic ' + (new Buffer(this.applicationId + ':' + this.applicationSecret).toString('base64'))
+		},
+		json: true
+	};
+*/
 	},
 
 	getAccessToken() {
-		/*
-		const authOptions = {
-			url: 'https://accounts.spotify.com/api/token',
-				form: {
-				code: 'code',
-					redirect_uri: this.redirect_uri,
-					grant_type: 'authorization_code'
-			},
-			headers: {
-				'Authorization': 'Basic ' + (new Buffer(this.applicationId + ':' + this.applicationSecret).toString('base64'))
-			},
-			json: true
-		};
-		*/
+		// First check, ss if we already have it
+		if (accessToken) {return accessToken}
+
+		// Second check, see if we have received the response from Spotify
+		else if (window.location.href.match(/access_token=([^&]*)/) !== null) {
+			accessToken = window.location.href.match(/access_token=([^&]*)/);
+			expiresIn = window.location.href.match(/expires_in=([^&]*)/);
+			window.setTimeout(() => accessToken = '', expiresIn * 1000);
+			window.history.pushState('Access Token', null, '/');
+			return accessToken;
+		}
+
+		// Third check, redirect User to Spotify to obtain an access token
+		else {this.redirectUserToObtainAccessToken()}
+	},
+
+	redirectUserToObtainAccessToken() {
+		window.location = `https://accounts.spotify.com/` +
+			`authorize?client_id=${this.applicationId}` +
+			`&response_type=token` +
+			`&scope=playlist-modify-public` +
+			`&redirect_uri=${this.redirect_uri}`;
 	},
 
 	// Search Spotify's database based on album, artist or track (song).
@@ -62,7 +96,6 @@ export const Spotify = {
 							artist: album.artists[0],
 							track: '',
 							uri: album.uri,
-							action: '+'
 						}
 					}
 				)
@@ -80,7 +113,6 @@ export const Spotify = {
 							artist: artist.name,
 							track: '',
 							uri: artist.uri,
-							action: '+'
 						}
 					}
 				)
@@ -98,7 +130,6 @@ export const Spotify = {
 							artist: track.artists[0],
 							track: track.name,
 							uri: track.uri,
-							action: '+'
 						}
 					}
 				)
