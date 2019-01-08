@@ -24,7 +24,7 @@ class App extends Component {
     }
 
     searchSpotify(searchValue) {
-	    Spotify.search(searchValue);
+	   // Spotify.search(searchValue);
         this.setState({searchResultsTracks: Spotify.search(searchValue)});
     }
 

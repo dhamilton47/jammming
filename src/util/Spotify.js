@@ -61,10 +61,12 @@ export const Spotify = {
 
 		// Second check, see if we have received the response from Spotify
 		else if (window.location.href.match(/access_token=([^&]*)/) !== null) {
-			accessToken = window.location.href.match(/access_token=([^&]*)/);
-			expiresIn = window.location.href.match(/expires_in=([^&]*)/);
+			accessToken = window.location.href.match(/access_token=([^&]*)/)[1];
+			expiresIn = window.location.href.match(/expires_in=([^&]*)/)[1];
+
 			window.setTimeout(() => accessToken = '', expiresIn * 1000);
 			window.history.pushState('Access Token', null, '/');
+
 			return accessToken;
 		}
 
