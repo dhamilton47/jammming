@@ -3,7 +3,7 @@ import key from '../env.js';
 
 let accessToken;
 
-export const Spotify = {
+const Spotify = {
 	applicationId: key['application_id'],
 	redirect_uri: 'http://localhost:3000/',
 
@@ -65,3 +65,5 @@ export const Spotify = {
 			});
 	}
 };
+
+export default Spotify;
