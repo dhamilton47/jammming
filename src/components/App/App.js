@@ -5,27 +5,21 @@ import {SearchResults} from "../SearchResults/SearchResults";
 import {Playlist} from "../Playlist/Playlist";
 import {Spotify} from "../../util/Spotify";
 
-import {playlistTracks} from "../SearchResults/searchResultsTest";
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-	        searchResultsTracks: [],
-	        playlistName: "Dan's Playlist",
-	        playlistTracks: playlistTracks,
+	        searchResults: [],
+	        playlistName: "Styx",
+	        playlistTracks: [],
         };
 
-        this.searchSpotify = this.searchSpotify.bind(this);
-	    this.addTrack = this.addTrack.bind(this);
-	    this.removeTrack = this.removeTrack.bind(this);
-	    this.updatePlaylistName = this.updatePlaylistName.bind(this);
-	    this.savePlaylist = this.savePlaylist.bind(this);
-    }
-
-    searchSpotify(searchValue) {
-	   // Spotify.search(searchValue);
-        this.setState({searchResultsTracks: Spotify.search(searchValue)});
+        this.addTrack = this.addTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this);
+        this.savePlaylist = this.savePlaylist.bind(this);
+        this.search = this.search.bind(this);
+        this.updatePlaylistName = this.updatePlaylistName.bind(this);
     }
 
     addTrack(track) {
@@ -44,6 +38,11 @@ class App extends Component {
 	updatePlaylistName(name) {
     	this.setState({playlistName: name})
 	}
+    search(term) {
+    	Spotify.search(term)
+		    .then(tracks => {
+		    this.setState({searchResults: tracks})
+	    })
 
 	savePlaylist() {
     	let trackURIs = playlistTracks.forEach(track => track.uri);
@@ -56,7 +55,7 @@ class App extends Component {
             <div>
                 <h1>Ja<span className="highlight">mmm</span>ing</h1>
                 <div className="App">
-                    <SearchBar searchSpotify={this.searchSpotify}/>
+                    <SearchBar onSearch={this.search} />
 
 	                <div className="App-playlist">
 		                <SearchResults

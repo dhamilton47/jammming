@@ -30,6 +30,7 @@ export class SearchBar extends Component {
 			<div className="SearchBar">
 				<input onChange={this.handleSearchValueChange} placeholder="Enter A Song, Album or Artist" />
 				<a onClick={this.handleSearch}>SEARCH</a>
+				<a onClick={this.search}>SEARCH</a>
 			</div>
 		);
 	}
