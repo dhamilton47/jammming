@@ -5,7 +5,7 @@ let accessToken;
 
 const Spotify = {
 	applicationId: key['application_id'],
-	redirect_uri: 'http://localhost:3000/',
+	redirect_uri: 'https://hamjammming.surge.sh/',
 
 	getAccessToken() {
 		// Step 1, see if we already have an access token
