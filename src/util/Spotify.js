@@ -1,11 +1,11 @@
 import key from '../env.js';
-//import {searchResultsTest} from '../components/SearchResults/searchResultsTest.js';
 
 let accessToken;
 
 const Spotify = {
 	applicationId: key['application_id'],
-	redirect_uri: 'https://hamjammming.surge.sh/',
+	//redirect_uri: 'https://hamjammming.surge.sh/',
+	redirect_uri: 'http://localhost:3000/',
 
 	getAccessToken() {
 		// Step 1, see if we already have an access token
@@ -43,11 +43,7 @@ const Spotify = {
 		};
 
 		return fetch(url, init)
-			.then(response => {
-				if (response.ok)
-					return response.json();
-				throw new Error('Request failed!');
-			}, networkError => console.log(networkError.message))
+			.then (this.returnJson, this.returnError)
 			.then(jsonResponse => {
 				if (jsonResponse.tracks.items) {
 					return jsonResponse.tracks.items.map(
