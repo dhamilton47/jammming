@@ -9,8 +9,10 @@ const Spotify = {
 
 	getAccessToken() {
 		// Step 1, see if we already have an access token
-		if (accessToken)
+		if (accessToken) {
+			localStorage.removeItem('term');
 			return accessToken;
+		}
 
 		// Step 2, if not, see if we have received a response from Spotify
 		let url = window.location.href;
@@ -21,6 +23,7 @@ const Spotify = {
 			window.setTimeout(() => accessToken = '', expiresIn * 1000);
 			window.history.pushState('Access Token', null, '/');
 
+			localStorage.removeItem('term');
 			return accessToken;
 		}
 
@@ -37,6 +40,7 @@ const Spotify = {
 	},
 
 	search(term) {
+		localStorage.setItem('term',term);
 		let url = `https://api.spotify.com/v1/search?type=track&q=${term}`;
 		let init = {
 			headers: {Authorization: `Bearer ${this.getAccessToken()}`}

@@ -19,11 +19,18 @@ class SearchBar extends Component {
 		this.props.onSearch(this.state.term);
 	}
 
+	componentWillMount() {
+		// Check localStorage for a value to the 'term' key.
+		if (localStorage.getItem('term'))
+			this.setState({term: localStorage.getItem('term')});
+	}
+
 	render() {
 		return (
 			<div className="SearchBar">
 				<input
 					placeholder="Enter A Song, Album or Artist"
+					value={this.state.term}
 					onChange={this.handleTermChange}
 				/>
 
